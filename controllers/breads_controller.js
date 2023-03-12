@@ -8,7 +8,11 @@ breads_router.get('/:arrayIndex', (req, res) => {
 
 // Index
 breads_router.get('/', (req, res) => {
-    res.send(Bread)
+    res.render('index', {
+        breads: Bread,
+        title: 'Index'
+    })
+    // res.send(Bread)
 })
 
 module.exports = breads_router
