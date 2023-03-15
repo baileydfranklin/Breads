@@ -1,0 +1,9 @@
+body{
+    background-color: cornsilk;
+}
+
+img{
+    width: 50%;
+    display: block;
+    margin: auto;
+}
