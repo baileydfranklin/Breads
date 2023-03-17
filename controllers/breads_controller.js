@@ -7,15 +7,37 @@ breads_router.get('/new', (req, res) => {
     res.render('new')
 })
 
+//Edit
+breads_router.get('/:arrayIndex/edit', (req, res) => {
+    res.render('edit', {
+        bread: Bread[req.params.arrayIndex],
+        index: req.params.arrayIndex,
+    })
+})
+
 //Show
 breads_router.get('/:arrayIndex', (req, res) => {
     if(Bread[req.params.arrayIndex]) {
         res.render('show', {
-            bread: Bread[req.params.arrayIndex]
+            bread: Bread[req.params.arrayIndex],
+            index: req.params.arrayIndex,
         })
     }else {
         res.send('this index does not exist --> 404 error')
     }
+})
+
+//Update
+breads_router.put('/:arrayIndex', (req, res) => {
+    req.body.hasGluten = req.body.hasGluten === 'on'
+    Bread[req.params.arrayIndex] = req.body
+    res.redirect(`/breads/${req.params.arrayIndex}`)
+})
+
+// Delete
+breads_router.delete('/:arrayIndex', (req, res) => {
+    Bread.splice(req.params.arrayIndex, 1)
+    res.status(303).redirect('/breads')
 })
 
 // Index
@@ -24,7 +46,6 @@ breads_router.get('/', (req, res) => {
         breads: Bread,
         title: 'Index'
     })
-    // res.send(Bread)
 })
 
 //Create

@@ -4,7 +4,11 @@ const PORT = process.env.PORT
 const express = require('express')
 const app = express()
 
+// Dependencies
+const methodOverride = require('method-override')
+
 //MIDDLEWARE
+app.use(methodOverride('_method')) // Because we used '_method' in the show.jsx
 app.use(express.static('public'))
 app.use(express.urlencoded({extended: true}))
 app.set('views', __dirname + '/views')
